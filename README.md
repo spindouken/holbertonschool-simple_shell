@@ -38,5 +38,6 @@ Medium  |  (https://towardsdev.com/unix-shell-command-line-interpreter-in-a-nuts
 ### Authors :memo::pencil:
  
 Clint Hendrickson | (https://github.com/Maitreya-today)
+
 Mason Counts  |  (https://github.com/spindouken)
 
