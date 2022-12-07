@@ -1,5 +1,73 @@
 #include "main.h"
 
+char *_strdup(char *str)
+{
+	int i;
+	char *dest;
+
+	if (str == NULL)
+		return (NULL);
+
+	for (i = 0; str[i] != '\0'; i++)
+		{ ; }
+
+	dest = malloc(sizeof(char) * (i + 1));
+	if (dest == NULL)
+		return (NULL);
+
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		dest[i] = str[i];
+	}
+
+	dest[i] = '\0';
+	return (dest);
+}
+
+int _strcount(char *str)
+{
+	int i;
+	int flag = 1;
+	int stringcount = 0;
+
+	for (i = 0; str[i]; i++)
+	{
+		if (str[i] != ' ' && flag == 1)
+		{
+			stringcount += 1;
+			flag = 0;
+		}
+		if (str[i + 1] == ' ')
+			flag = 1;
+	}
+	return (stringcount);
+}
+
+char **tokenize(char *buffer)
+{
+	char *token;
+	int i = 0, stringcount = 0;
+	char *delimiter = " \n";
+	char **tokenArray;
+
+	stringcount = _strcount(buffer);
+	if (!stringcount)
+		return (NULL);
+    //+1 to put null as end of array (used for cycling/searching)
+	tokenArray = malloc((stringcount + 1) * sizeof(char *));
+	if (tokenArray == NULL)
+		exit(1);
+	token = strtok(buffer, delimiter);
+	while (token != NULL)
+	{
+		tokenArray[i] = _strdup(token);
+		token = strtok(NULL, delimiter);
+		i++;
+	}
+	tokenArray[i] = NULL;
+	return (tokenArray);
+}
+
 char *_read(void)
 {
 	ssize_t readsize = 0;
@@ -92,7 +160,12 @@ int main(void)
 		buffer = _read();
 		if (*buffer != '\0')
 		{
-			
+			av = tokenize(buffer);
+			if (av == NULL)
+			{
+				free(buffer);
+				continue;
+			}
 			// token = strtok(buffer, " ");
 			// while (token != NULL)
 			// {
@@ -147,7 +220,7 @@ int main(void)
 			// tokens[1] = "-l"
 			// tokens[2] = "*.c",
 			// extern char environ);
-
+a
 			//need to figure out how wait will work
 			// pid_t child_pid;
 			// pid_t wait_result;
