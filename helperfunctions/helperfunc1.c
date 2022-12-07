@@ -77,16 +77,15 @@ char *_strcat(char *dest, char *src)
  * Return: compared values
  */
 
-int _strcmp(char *s1, char *s2)
+int _strcmp(const char *s1, const char *s2)
 {
-	int i, b;
-
-	i = 0;
-	while (s1[i] == s2[i] && s1[i] != '\0')
+	while ((*s1 != '\0' && *s2 != '\0') && *s1 == *s2)
 	{
-		i++;
+		s1++;
+		s2++;
 	}
-
-	b = s1[i] - s2[i];
-	return (b);
+	if (*s1 == *s2)
+		return (0);
+	else
+		return (*s1 - *s2);
 }
