@@ -1,5 +1,128 @@
 #include "main.h"
+/**
+ * _forkandReplace - forks a process and if the child process is successful
+ * it executes the command, but if the child process fails
+ * prints an error message and exits
+ * @tokenArray: array of tokenized arguments passed to the program from stdin
+ * @CLIbuffer: buffer that contains the command line input (CLI)
+ * @commandPATHbuffer: full path of the command to be executed
+ * Return: exit status of the child process
+ */
+int _forkandReplace(char **tokenArray, char *CLIbuffer, char *commandPATHbuffer)
+{
+	int i, status, errorReturnCheck, exitstatus = 0;
+	pid_t pid;
+	/**
+	 * Fork process, if the child process is successful execute the command,
+	 * if the child process fails print an error message and exit
+	*/
+	pid = fork();
+	if (pid == -1)
+	{
+		perror("Error");
+		exit(1);
+	}
+	if (pid == 0)
+	{
+		errorReturnCheck = execve(commandPATHbuffer, tokenArray, environ);
+		if (errorReturnCheck == -1)
+		{
+			perror(tokenArray[0]);
+			for (i = 0; tokenArray[i]; i++)
+			free(tokenArray[i]);
+			free(tokenArray);
+			free(CLIbuffer);
+			exit(127); /*exit code 127 - command not found in PATH or builtin*/
+		}
+	}
+	wait(&status);
+	if (WIFEXITED(status))
+	{
+		exitstatus = WEXITSTATUS(status);
+	}
+	/* Free the memory allocated for the command. */
+	for (i = 0; tokenArray[i]; i++)
+		free(tokenArray[i]);
+	free(tokenArray);
+	free(CLIbuffer);
+	return (exitstatus);
+}
+/**
+ * _putchar - writes a character to the standard output
+ * @c: character to print
+ * Return: the value of write
+ */
+int _putchar(char c)
+{
+	return (write(1, &c, 1));
+}
+/**
+ * _printstring - takes a string and prints it to the standard output
+ * @str: string to be printed
+ * Return: Always Success
+ */
+void _printstring(char *str)
+{
+	int c;
 
+	for (c = 0; str[c] != '\0'; c++)
+		_putchar(str[c]);
+	_putchar('\n');
+}
+/**
+ * _printenv - print the environment
+ * Return: 0 on completion
+ */
+int _printenv(void)
+{
+	int i;
+
+	for (i = 0; environ[i]; i++)
+		_printstring(environ[i]);
+	return (0);
+}
+/**
+ * builtin_checker - contains the built in functions
+ * How it works: checks if the command is built into the shell,
+ * if it is a builtin command the associated program will be executed
+ * @tokenArray: array of tokenized arguments passed to the program from stdin
+ * @CLIbuffer: buffer that contains the command line input (CLI)
+ * @exitstatus: exit status of the last command executed
+ * Return: value of exit status
+ */
+int builtin_checker(char **tokenArray, char *CLIbuffer, int exitstatus)
+{
+	int i;
+	/**
+	 * Check if the command is "env", if it is
+	 * print the environment variables, then
+	 * free the tokenArray, free the buffer, and return 1
+	 */
+	if (_strcmp(tokenArray[0], "env") == 0)
+	{
+		_printenv();
+		for (i = 0; tokenArray[i]; i++)
+			free(tokenArray[i]);
+		free(tokenArray);
+		free(CLIbuffer);
+		return (1);
+	}
+	/**
+	 * check if the command is "exit", if it is
+	 * free all the memory that was allocated for the command,
+	 * then exit the shell
+	 */
+	else if (_strcmp(tokenArray[0], "exit") == 0)
+	{
+		for (i = 0; tokenArray[i]; i++)
+			free(tokenArray[i]);
+		free(tokenArray);
+		free(CLIbuffer);
+		exit(exitstatus);
+	}
+	else
+		return (0);
+}
 /**
  * _memset - fill first n bytes of the memory area
  * , pointed to by *s, with char b
@@ -20,7 +143,7 @@ char *_memset(char *s, char b, unsigned int n)
 	return (s);
 }
 /**
- * _concatPATHloc -
+ * _concatPATHloc - concatenate path location with / and command
  * @tmp: mem location
  * @tokenArray: array of tokenized arguments passed to the program
  * @tok: tokenized string from the PATH environment variable
@@ -171,24 +294,25 @@ int _strcount(char *str)
 }
 /**
  * tokenizer - takes a string and parses it into an array of strings (tokens)
- * @buffer: string to be tokenized
+ * @CLIbuffer: string to be tokenized
+ * (buffer that contains the command line input (CLI))
  * Return: pointer to an array of strings (tokens)
  */
-char **tokenizer(char *buffer)
+char **tokenizer(char *CLIbuffer)
 {
 	char *token;
 	int i = 0, stringcount = 0;
 	char *delimiter = " \n";
 	char **tokenArray;
 
-	stringcount = _strcount(buffer);
+	stringcount = _strcount(CLIbuffer);
 	if (!stringcount)
 		return (NULL);
 	/* +1 to put null as end of array (used for cycling/searching) */
 	tokenArray = malloc((stringcount + 1) * sizeof(char *));
 	if (tokenArray == NULL)
 		exit(1);
-	token = strtok(buffer, delimiter);
+	token = strtok(CLIbuffer, delimiter);
 	while (token != NULL)
 	{
 		tokenArray[i] = _strdup(token);
@@ -200,7 +324,7 @@ char **tokenizer(char *buffer)
 }
 /**
  * _read - reads a single line from stdin, removes the newline character,
- * and returns a pointer to the string
+ * and returns a pointer to the edited string
  * Return: pointer to the edited stdin string
  */
 char *_read(void)
@@ -211,7 +335,6 @@ char *_read(void)
 	int i = 0;
 
 	readsize = getline(&buffer, &n, stdin);
-
 	if (readsize == -1)
 	{
 		free(buffer);
@@ -257,7 +380,7 @@ int _strcmpPATH(const char *s1, const char *s2)
  * a certain environment variable
  * (we will be looking for the PATH)
  * and returns a pointer to the location 
- * of the environment variable if it finds it.
+ * of the environment variable if it finds it
  * @name: name of the environment variable to retrieve
  * Return: environment variable
  */
@@ -283,9 +406,11 @@ int main(void)
 {
 	char *PATH = NULL;
 	ssize_t writecount = 0;
-	char *prompt = ";] ";
 	char **tokenArray;
-	char *buffer = NULL;
+	char *CLIbuffer = NULL;
+	int exitstatus = 0;
+	char *copy = NULL;
+	char *commandPATHbuffer = NULL;
 
 	PATH = _getenv("PATH");
 	if (PATH == NULL)
@@ -295,24 +420,28 @@ int main(void)
 	{
 		if (isatty(STDIN_FILENO) == 1)
 		{
-			writecount = write(STDOUT_FILENO, prompt, 2);  
+			writecount = write(STDOUT_FILENO, ";) ", 3);  
 			if (writecount == -1)
 				exit(0);
 		}
 
 		tokenArray = NULL;
-		buffer = _read();
-		if (*buffer != '\0')
+		CLIbuffer = _read();
+		if (*CLIbuffer != '\0')
 		{
-			tokenArray = tokenizer(buffer);
+			tokenArray = tokenizer(CLIbuffer);
 			if (tokenArray == NULL)
 			{
-				free(buffer);
+				free(CLIbuffer);
 				continue;
 			}
+			commandPATHbuffer = _commandPATH(tokenArray, PATH, copy);
+			if (builtin_checker(tokenArray, CLIbuffer, exitstatus) == 1)
+				continue;
+			exitstatus = _forkandReplace(tokenArray, CLIbuffer, commandPATHbuffer);
 		}
 		else
-			free(buffer);
+			free(CLIbuffer);
 	}
 	return (0);
 }
