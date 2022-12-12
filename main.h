@@ -1,23 +1,38 @@
-#define MAIN_H
 #ifndef MAIN_H
+#define MAIN_H
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
-extern char environ;
+extern char **environ;
 
-int main(argc, **argv, **envp);
+int main(void);
 char *_getenv(const char *name);
-int _PATHstrcmp(const char *s1, const char *s2);
+int _strcmpPATH(const char *s1, const char *s2);
 char *_read(void);
 char **tokenizer(char *buffer);
-int _strcount(char *str)
-char *_strdup(char *str)
-//helper functions
+int _strcount(char *str);
+char *_strdup(char *str);
+char *_commandPATH(char **tokenArray, char *PATH, char *copy);
+int _countPATHdirectories(char *str);
+char *_concatPATHloc(char *tmp, char **tokenArray, char *tok);
+char *_memset(char *s, char b, unsigned int n);
+int builtin_checker(char **tokenArray, char *buffer, int exitstatus);
+int _printenv(void);
+void _printstring(char *str);
+int _putchar(char c);
+int _forkandReplace(char **tokenArray, char *buffer, char *commandPATHbuffer);
+
+/* HELPER FUNCTIONS */
 int _strlen(char *s);
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, char *src);
-int _strcmp(char *s1, char *s2);
+int _strcmp(const char *s1, const char *s2);
 
 #endif

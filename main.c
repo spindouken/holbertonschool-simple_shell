@@ -1,4 +1,5 @@
 #include "main.h"
+
 /**
  * _forkandReplace - forks a process and if the child process is successful
  * it executes the command, but if the child process fails
@@ -12,6 +13,7 @@ int _forkandReplace(char **tokenArray, char *CLIbuffer, char *commandPATHbuffer)
 {
 	int i, status, errorReturnCheck, exitstatus = 0;
 	pid_t pid;
+
 	/**
 	 * Fork process, if the child process is successful execute the command,
 	 * if the child process fails print an error message and exit
@@ -93,8 +95,9 @@ int _printenv(void)
 int builtin_checker(char **tokenArray, char *CLIbuffer, int exitstatus)
 {
 	int i;
+
 	/**
-	 * Check if the command is "env", if it is
+	 * Check if the command from stdin is "env", if it is
 	 * print the environment variables, then
 	 * free the tokenArray, free the buffer, and return 1
 	 */
@@ -107,8 +110,9 @@ int builtin_checker(char **tokenArray, char *CLIbuffer, int exitstatus)
 		free(CLIbuffer);
 		return (1);
 	}
+
 	/**
-	 * check if the command is "exit", if it is
+	 * check if the command from stdin is "exit", if it is
 	 * free all the memory that was allocated for the command,
 	 * then exit the shell
 	 */
@@ -125,7 +129,7 @@ int builtin_checker(char **tokenArray, char *CLIbuffer, int exitstatus)
 }
 /**
  * _memset - fill first n bytes of the memory area
- * , pointed to by *s, with char b
+ * pointed to by *s with char b
  * @s: pointer to the memory area to be filled
  * @b: the character to fill the memory with
  * @n: number of bytes to fill
@@ -165,7 +169,7 @@ char *_concatPATHloc(char *tmp, char **tokenArray, char *tok)
  * _countPATHdirectories - count the directories that
  * branch out of the PATH directory
  * @str: PATH directory (string containing all directories
- * of PATH, separated by : delimiter)
+ * of PATH, separated by the : delimiter)
  * Return: number of directories in PATH directory
  */
 int _countPATHdirectories(char *str)
