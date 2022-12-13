@@ -75,7 +75,7 @@ Medium  |  (https://towardsdev.com/unix-shell-command-line-interpreter-in-a-nuts
 
 SLACK :eye_speech_bubble: |  (https://slack.com/signin#/signin)
 
-:ok::peace::man_technologist::two_hearts::woman_technologist::rainbow_flag::technologist: 
+:ok::peace_symbol::man_technologist::two_hearts::woman_technologist::rainbow_flag::technologist: 
 OKLAHOLBIES  |  (https://holbertontulsa.com/)
 
 ### Authors :memo::pencil:
