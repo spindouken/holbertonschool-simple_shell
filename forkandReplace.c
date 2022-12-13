@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * _forkandReplace - forks a process and if the child process is successful
+ * forkandReplace - forks a process and if the child process is successful
  * it executes the command, but if the child process fails
  * prints an error message and exits
  * @tokenArray: array of tokenized arguments passed to the program from stdin
@@ -9,7 +9,7 @@
  * @commandPATHbuffer: full path of the command to be executed
  * Return: exit status of the child process
  */
-int _forkandReplace(char **tokenArray, char *CLIbuffer, char *commandPATHbuffer)
+int forkandReplace(char **tokenArray, char *CLIbuffer, char *commandPATHbuffer)
 {
 	int i, status, errorReturnCheck, exitstatus = 0;
 	pid_t pid;

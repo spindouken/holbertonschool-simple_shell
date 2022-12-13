@@ -29,7 +29,7 @@ int builtin_checker(char **tokenArray, char *buffer, int exitstatus);
 int _printenv(void);
 void _printstring(char *str);
 int _putchar(char c);
-int _forkandReplace(char **tokenArray, char *buffer, char *commandPATHbuffer);
+int forkandReplace(char **tokenArray, char *buffer, char *commandPATHbuffer);
 
 /* HELPER FUNCTIONS */
 int _strlen(char *s);

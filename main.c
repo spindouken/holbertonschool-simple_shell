@@ -40,7 +40,7 @@ int main(void)
 			commandPATHbuffer = _commandPATH(tokenArray, PATH, copy);
 			if (builtin_checker(tokenArray, CLIbuffer, exitstatus) == 1)
 				continue;
-			exitstatus = _forkandReplace(tokenArray, CLIbuffer, commandPATHbuffer);
+			exitstatus = forkandReplace(tokenArray, CLIbuffer, commandPATHbuffer);
 		}
 		else
 			free(CLIbuffer);
