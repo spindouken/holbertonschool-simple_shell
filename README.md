@@ -73,6 +73,10 @@ Wiki  |  (https://en.wikipedia.org/wiki/Ken_Thompson)
 
 Medium  |  (https://towardsdev.com/unix-shell-command-line-interpreter-in-a-nutshell-6bc91466a83f)
 
+SLACK :eye_speech_bubble: |  (https://slack.com/signin#/signin)
+
+:ok::peace::man_technologist::two_hearts::woman_technologist::rainbow_flag::technologist: 
+OKLAHOLBIES  |  (https://holbertontulsa.com/)
 
 ### Authors :memo::pencil:
  
