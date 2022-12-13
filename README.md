@@ -21,7 +21,8 @@
 ![Flowchart of simple shell](https://user-images.githubusercontent.com/103126719/183076997-63175c7e-a122-4e98-bfc1-3ac16b5288e2.png)
 ### :computer_mouse: CLICK ME  |  (https://miro.com/app/board/uXjVP-i0iRk=/)
 
-##Functions and system calls used  :desktop_computer: :floppy_disk: :calling:
+
+### Functions and system calls used  :desktop_computer: :floppy_disk: :calling:
 - `execve`
 - `exit`  
 - `fork`  
@@ -29,18 +30,17 @@
 - `getline`   
 - `isatty`    
 - `open`  
-- `perror` (man 3 perror)  
-- `stat` (__xstat) (man 2 stat)  
-- `strcat` (man 3 strcat)  
-- `strchr` (man 3 strchr) 
-- `strcmp` (man 3 strcmp)
-- `strcpy` (man 3 strcpy)  
-- `strdup` (man 3 strdup)  
-- `strtok` (man 3 strtok)  
-- `va_arg` (man 2 va_arg)  
-- `va_end` (man 2 va_end)  
-- `va_start` (man 2 va_start)
-- `wait` (man 2 wait)  
+- `perror`
+- `stat` 
+- `strcat` 
+- `strchr` 
+- `strcmp` 
+- `strdup` 
+- `strtok` 
+- `va_arg` 
+- `va_end`  
+- `va_start` 
+- `wait`  
 
 ### Compilation :wrench:
 ```
