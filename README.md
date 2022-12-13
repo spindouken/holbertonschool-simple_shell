@@ -46,7 +46,7 @@
 ```
 gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 ```
-<img width="416" alt="simpleshellexample" src="https://user-images.githubusercontent.com/103126719/182978245-0edcef34-05e9-4408-be94-01edff2c7270.png">
+ ./hsh - example fix
 
 ## Files :file_folder: :open_file_folder:
 - **`AUTHORS`** : List of contributors  
