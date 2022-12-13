@@ -17,7 +17,7 @@
 * How to suspend the execution of a process until one of its children terminates
 * What is EOF / “end-of-file”?
 
-## Flowchart :rowboat: :bar_chart:
+## Flowchart 🌊: :bar_chart:
 ![Flowchart of simple shell](https://user-images.githubusercontent.com/103126719/183076997-63175c7e-a122-4e98-bfc1-3ac16b5288e2.png)
 ### :computer_mouse: CLICK ME  |  (https://miro.com/app/board/uXjVP-i0iRk=/)
 
