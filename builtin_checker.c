@@ -28,18 +28,10 @@ void _printstring(char *str)
  */
 int _printenv(void)
 {
-	int i, j;
-
-	if (!environ || !(*environ))
-		return (-1);
+	int i;
+	
 	for (i = 0; environ[i]; i++)
-	{
-		for (j = 0; environ[i][j]; j++)
-		{
-			write(STDOUT_FILENO, &environ[i][j], 1);
-		}
-		write(STDOUT_FILENO, "\n", 1);
-	}
+		_printstring(environ[i]);
 	return (0);
 }
 /**
@@ -53,7 +45,7 @@ int _printenv(void)
  */
 int builtin_checker(char **tokenArray, char *CLIbuffer, int exitstatus)
 {
-	int i;
+	int i, j;
 
 	/**
 	 * Check if the command from stdin is "env", if it is
@@ -62,7 +54,19 @@ int builtin_checker(char **tokenArray, char *CLIbuffer, int exitstatus)
 	 */
 	if (_strcmp(tokenArray[0], "env") == 0)
 	{
-		_printenv();
+		if (!environ || !(*environ))
+		{
+			return (-1);
+		}
+		for (i = 0; environ[i]; i++)
+		{
+			for (j = 0; environ[i][j]; j++)
+			{
+				write(STDOUT_FILENO, &environ[i][j], 1);
+			}
+			write(STDOUT_FILENO, "\n", 1);
+		}
+
 		for (i = 0; tokenArray[i]; i++)
 			free(tokenArray[i]);
 		free(tokenArray);
