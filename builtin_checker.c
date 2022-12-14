@@ -28,12 +28,18 @@ void _printstring(char *str)
  */
 int _printenv(void)
 {
-	int i;
+	int i, j;
 
 	if (!environ || !(*environ))
 		return (-1);
 	for (i = 0; environ[i]; i++)
-		_printstring(environ[i]);
+	{
+		for (j = 0; environ[i][j]; j++)
+		{
+			write(STDOUT_FILENO, &environ[i][j], 1);
+		}
+		write(STDOUT_FILENO, "\n", 1);
+	}
 	return (0);
 }
 /**
