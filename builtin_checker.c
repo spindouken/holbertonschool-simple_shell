@@ -56,7 +56,8 @@ int builtin_checker(char **tokenArray, char *CLIbuffer, int exitstatus)
 	{
 		if (!environ || !(*environ))
 			return (-1);
-		_printenv();
+		else
+			_printenv();
 		for (i = 0; tokenArray[i]; i++)
 			free(tokenArray[i]);
 		free(tokenArray);
