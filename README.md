@@ -17,7 +17,7 @@
 * How to suspend the execution of a process until one of its children terminates
 * What is EOF / “end-of-file”?
 
-## Flowchart :rowboat: :bar_chart:
+## Flowchart 🌊 :bar_chart:
 ![Flowchart of simple shell](https://user-images.githubusercontent.com/103126719/183076997-63175c7e-a122-4e98-bfc1-3ac16b5288e2.png)
 ### :computer_mouse: CLICK ME  |  (https://miro.com/app/board/uXjVP-i0iRk=/)
 
@@ -46,7 +46,7 @@
 ```
 gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 ```
-<img width="416" alt="simpleshellexample" src="https://user-images.githubusercontent.com/103126719/182978245-0edcef34-05e9-4408-be94-01edff2c7270.png">
+ ./hsh - example fix
 
 ## Files :file_folder: :open_file_folder:
 - **`AUTHORS`** : List of contributors  
@@ -73,6 +73,10 @@ Wiki  |  (https://en.wikipedia.org/wiki/Ken_Thompson)
 
 Medium  |  (https://towardsdev.com/unix-shell-command-line-interpreter-in-a-nutshell-6bc91466a83f)
 
+SLACK :eye_speech_bubble: |  (https://slack.com/signin#/signin)
+
+:ok::peace_symbol::man_technologist::two_hearts::woman_technologist::rainbow_flag::technologist: 
+OKLAHOLBIES  |  (https://holbertontulsa.com/)
 
 ### Authors :memo::pencil:
  
