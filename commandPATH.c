@@ -95,12 +95,14 @@ char *_commandPATH(char **tokenArray, char *PATH, char *copy)
 			fullpathflag = 1;
 			break;
 		}
-		if (length < PATHcount - 2)
+		if (length < PATHcount - 2) /* avoid last two tokens */
 		{
 			toklen = _strlen(tok);
 			if (tok[toklen + 1] == ':')
+			/* check if second to last token is ":" */
 			{
 				if (stat(tokenArray[0], &statbuff) == 0)
+				/* check if command specified is a valid path using stat */
 				{
 					commandPATH = tokenArray[0];
 					fullpathflag = 1;

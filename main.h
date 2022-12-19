@@ -26,9 +26,6 @@ int _countPATHdirectories(char *str);
 char *_concatPATHloc(char *tmp, char **tokenArray, char *tok);
 char *_memset(char *s, char b, unsigned int n);
 int builtin_checker(char **tokenArray, char *buffer, int exitstatus);
-int _printenv(void);
-void _printstring(char *str);
-int _putchar(char c);
 int forkandReplace(char **tokenArray, char *buffer, char *commandPATHbuffer);
 
 /* HELPER FUNCTIONS */

@@ -10,7 +10,7 @@ char **tokenizer(char *CLIbuffer)
 {
 	char *token;
 	int i = 0, stringcount = 0;
-	char *delimiter = " \n";
+	char *delimiter = " \n"; /* will tokenize CLI by space or newline */
 	char **tokenArray;
 
 	stringcount = _strcount(CLIbuffer);
@@ -47,10 +47,10 @@ int _strcount(char *str)
 		if (str[i] != ' ' && flag == 1)
 		{
 			stringcount += 1;
-			flag = 0;
+			flag = 0; /* set flag to 0 indicating not at a space character */
 		}
 		if (str[i + 1] == ' ')
-			flag = 1;
+			flag = 1; /* at a space character */
 	}
 	return (stringcount);
 }
@@ -69,7 +69,7 @@ char *_strdup(char *str)
 		return (NULL);
 
 	for (i = 0; str[i] != '\0'; i++)
-		{ ; }
+		{ ; } /* getting length of str as i */
 
 	dest = malloc(sizeof(char) * (i + 1));
 	if (dest == NULL)

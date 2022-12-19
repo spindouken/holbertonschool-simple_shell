@@ -34,7 +34,7 @@ int _strcmpPATH(const char *s1, const char *s2)
 {
 	int i;
 
-	for (i = 0; s2[i] != '='; i++)
+	for (i = 0; s2[i] != '='; i++) /* pull PATH before =, ex. 'PATH=' */
 	{
 		if (s1[i] != s2[i])
 			return (-1);

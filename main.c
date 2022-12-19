@@ -20,11 +20,11 @@ int main(void)
 
 	while (1)
 	{
-		if (isatty(STDIN_FILENO) == 1)
+		if (isatty(STDIN_FILENO) == 1) /* 1 - keyboard, 0 - terminal */
 		{
 			writecount = write(STDOUT_FILENO, "$ ", 2);
-			if (writecount == -1)
-				exit(0);
+			if (writecount == -1) /* write returns -1 on error */
+				exit(0); /* exit with return value 0 */
 		}
 
 		tokenArray = NULL;
@@ -41,6 +41,7 @@ int main(void)
 			if (builtin_checker(tokenArray, CLIbuffer, exitstatus) == 1)
 				continue;
 			exitstatus = forkandReplace(tokenArray, CLIbuffer, commandPATHbuffer);
+			/* get exit status of child process */
 		}
 		else
 			free(CLIbuffer);
